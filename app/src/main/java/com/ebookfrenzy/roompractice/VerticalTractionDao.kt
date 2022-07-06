@@ -14,5 +14,5 @@ interface VerticalTractionDao {
 
     @Delete
     suspend fun delete(VerticalTraction: VerticalTraction)
-    
+
 }
