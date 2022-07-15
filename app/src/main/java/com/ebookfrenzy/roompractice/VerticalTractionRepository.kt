@@ -1,25 +1,26 @@
 package com.ebookfrenzy.roompractice
 
+import Database.VerticalTractionDao
+import android.content.Context
 import androidx.annotation.WorkerThread
 import kotlinx.coroutines.flow.Flow
 
-// Declares the DAO as a private property in the constructor. Pass in the DAO
-// instead of the whole database, because you only need access to the DAO
+class VerticalTractionRepository private constructor(context: Context) {
 
-class VerticalTractionRepository(private val verticalTractionDao: VerticalTractionDao) {
+    companion object {
+        private var INSTANCE: VerticalTractionRepository? = null
 
-        // Room executes all queries on a separate thread.
-        // Observed Flow will notify the observer when the data has changed.
+        fun initialize(context: Context) {
+            if (INSTANCE == null) {
+                INSTANCE = VerticalTractionRepository(context)
+            }
+        }
 
-        val allWords: Flow<List<VerticalTraction>> = VerticalTractionDao.getAlphabetizedWords()
-
-        // By default Room runs suspend queries off the main thread, therefore, we don't need to
-        // implement anything else to ensure we're not doing long running database work
-        // off the main thread.
-
-        @Suppress("RedundantSuspendModifier")
-        @WorkerThread
-        suspend fun insert(word: Word) {
-            VerticalTractionDao.insert(word)
+        fun get(): VerticalTractionRepository {
+            return INSTANCE ?: throw  IllegalStateException("CrimeRepositor;y muyst be initialized")
         }
     }
+}
+
+
+

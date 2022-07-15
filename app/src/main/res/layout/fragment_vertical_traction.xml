@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".TasksFragment">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ebookfrenzy.roompractice.VerticalTractionViewModel" />
+    </data>
+<LinearLayout
+
+    tools:context=".ui.main.MainFragment"
     android:id="@+id/weight"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingRight="20dp"
-    android:orientation="vertical"
-    tools:context=".ui.main.MainFragment">
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/textView"
@@ -41,18 +50,19 @@
             android:layout_height="match_parent"
             android:layout_weight="1">
 
-            <EditText
+            <TextView
                 android:id="@+id/date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
                 android:ems="10"
+                android:text = "Date"
                 android:inputType="date"
-                android:text="Date"
                 android:textAlignment="center"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
 
             <EditText
                 android:id="@+id/enterDate"
@@ -64,14 +74,15 @@
                 android:hint="mo/day/yr"
                 android:inputType="date"
                 android:textAlignment="center"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:text="@={viewModel.newVerticalTractionDate}"/>
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
+            <TextView
                 android:id="@+id/Weight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -92,14 +103,15 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:text="@={viewModel.newVerticalTractionWeight}"/>
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <EditText
+            <TextView
                 android:id="@+id/reps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -120,7 +132,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:text="@={viewModel.newVerticalTractionReps}"/>
         </TableRow>
 
     </TableLayout>
@@ -138,7 +151,8 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:text="Add"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:onClick="@{() -> viewModel.addVerticalTraction()}" />
 
         <Button
             android:id="@+id/button2"
@@ -156,3 +170,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>
+</layout>
